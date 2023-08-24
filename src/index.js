@@ -1,8 +1,22 @@
 import axios from 'axios';
 import simpleLightbox from 'simplelightbox';
-import { error, totalHitsFn, createCards, htmlElements } from './js/helpers';
+import Notiflix from 'notiflix';
+
+function error(err) {
+  Notiflix.Notify.failure(
+    'Sorry, there are no images matching your search query. Please try again.'
+  );
+}
+
+const htmlElements = {
+  form: document.querySelector('.search-form'),
+  div: document.querySelector('.gallery'),
+  btnLoadMore: document.querySelector('.voltage-button'),
+  sorry: document.querySelector('.sorry'),
+};
+
 let numbPage = 0;
-let searchValue = '';
+let searchValue = null;
 let stopCounter = 0;
 
 function createSearch(search) {
@@ -30,6 +44,41 @@ function createSearch(search) {
     });
 }
 
+function createCards(arr) {
+  return arr
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => {
+        return `<div class="photo-card">
+    <img class='img-card' src="${webformatURL}" alt="${tags}" loading="lazy" width='300px' height='200px'/>
+    <div class="info">
+      <p class="info-item">
+        <b>Likes</b>${likes}
+      </p>
+      <p class="info-item">
+        <b>Views</b>${views}
+      </p>
+      <p class="info-item">
+        <b>Comments</b>${comments}
+      </p>
+      <p class="info-item">
+        <b>Downloads</b>${downloads}
+      </p>
+    </div>
+  </div>`;
+      }
+    )
+    .join('');
+}
+
+
 htmlElements.form.addEventListener('submit', searchFn);
 htmlElements.btnLoadMore.addEventListener('click', loadMoreFn);
 
@@ -46,7 +95,6 @@ function searchFn(evt) {
         htmlElements.div.insertAdjacentHTML('beforeend', createCards(res.hits));
         htmlElements.btnLoadMore.style.display = 'block';
         stopCounter += 40;
-        totalHitsFn(res.totalHits);
       }
     })
     .catch(err => {
