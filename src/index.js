@@ -78,7 +78,6 @@ function createCards(arr) {
     .join('');
 }
 
-
 htmlElements.form.addEventListener('submit', searchFn);
 htmlElements.btnLoadMore.addEventListener('click', loadMoreFn);
 
@@ -93,8 +92,10 @@ function searchFn(evt) {
     .then(res => {
       if (res) {
         htmlElements.div.insertAdjacentHTML('beforeend', createCards(res.hits));
-        htmlElements.btnLoadMore.style.display = 'block';
         stopCounter += 40;
+        if (res.totalHits >= stopCounter) {
+          htmlElements.btnLoadMore.style.display = 'block';
+        }
       }
     })
     .catch(err => {
