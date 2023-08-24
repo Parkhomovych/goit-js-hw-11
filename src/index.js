@@ -16,14 +16,14 @@ const htmlElements = {
 };
 
 let numbPage = 0;
-let searchValue = null;
+let searchValue = '';
 let stopCounter = 0;
 
 function createSearch(search) {
   const BASE_URL = 'https://pixabay.com/api?';
   const searchParams = new URLSearchParams({
     key: '38997661-54e537908498a57afa3a31c75',
-    q: search,
+    q: searchValue,
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: 'true',
