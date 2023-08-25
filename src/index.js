@@ -20,7 +20,7 @@ let searchValue = '';
 let stopCounter = 0;
 
 function createSearch(search) {
-  const BASE_URL = 'https://pixabay.com/api';
+  const BASE_URL = 'https://pixabay.com/api/?';
   const searchParams = new URLSearchParams({
     key: '38997661-54e537908498a57afa3a31c75',
     q: searchValue,
@@ -32,7 +32,7 @@ function createSearch(search) {
   });
 console.log(`${BASE_URL}${searchParams}`);
   return axios
-    .get(`${BASE_URL}?${searchParams}`)
+    .get(`${BASE_URL}${searchParams}`)
     .then(res => {
       if (res.data.totalHits === 0) {
         throw error;
