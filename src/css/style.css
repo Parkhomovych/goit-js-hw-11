@@ -20,9 +20,10 @@ img {
   display: block;
 }
 html {
+  scroll-behavior: smooth;
   background: linear-gradient(
     90deg,
-    rgba(42, 245, 152, 1) 0%,
+    rgb(42, 245, 152) 0%,
     rgba(0, 158, 253, 1) 100%
   );
 }
@@ -130,28 +131,47 @@ body {
   justify-content: center;
   gap: 5px;
 }
-.sorry{
+.sorry {
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
   font-weight: 700;
   font-size: 35px;
   display: none;
-  color:#194a0d
+  color: #194a0d;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
+.scroll-top {
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 30px;
+  right: 25px;
+  background-color: rgb(42, 245, 152);
+  border-radius: 50%;
+}
+.svg-up {
+  fill: rgba(0, 158, 253, 1);
+}
+.scroll-down{
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 30px;
+  left: 25px;
+  background-color: rgba(0, 158, 253, 1);
+  border-radius: 50%;
+}
+.svg-down {
+  fill:  rgb(42, 245, 152);
+}
 .voltage-button {
   display: none;
   position: relative;

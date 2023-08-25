@@ -24,9 +24,20 @@
           </button>
         </div>
       </form>
+      <a href="#down" class="scroll-down">
+        <svg class="svg-down" width="20" height="20">
+          <use href="./all.svg#circle-down"></use>
+        </svg>
+      </a>
     </div>
     <div class="gallery"></div>
-    <div class="voltage-button">
+    <a href="#search-form" class="scroll-top">
+      <svg class="svg-up" width="20" height="20">
+        <use href="./all.svg#circle-up"></use>
+      </svg>
+    </a>
+
+    <div id="down" class="voltage-button">
       <button>Button</button>
       <svg
         version="1.1"
@@ -86,7 +97,9 @@
         <div class="dot dot-5"></div>
       </div>
     </div>
-    <p class="sorry">"We're sorry, but you've reached the end of search results."</p>
+    <p class="sorry">
+      "We're sorry, but you've reached the end of search results."
+    </p>
     <script type="module" src="./index.js"></script>
   </body>
 </html>
