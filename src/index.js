@@ -13,7 +13,7 @@ function returnStartValue() {
   numbPage = 0;
   stopCounter = 0;
 }
-function createSearch(search) {
+async function createSearch(search) {
   const BASE_URL = 'https://pixabay.com/api/?';
   const searchParams = new URLSearchParams({
     key: '38997661-54e537908498a57afa3a31c75',
@@ -24,59 +24,57 @@ function createSearch(search) {
     page: (numbPage += 1),
     per_page: 40,
   });
-  return axios
-    .get(`${BASE_URL}${searchParams}`)
-    .then(res => {
-      if (res.data.totalHits === 0) {
-        throw error;
-      }
-      return res.data;
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  try {
+    const repons = await axios.get(`${BASE_URL}${searchParams}`);
+    if (repons.data.totalHits === 0) {
+      throw error;
+    }
+    return repons.data;
+  } catch (err) {
+    error();
+  }
 }
 
 htmlElements.form.addEventListener('submit', searchFn);
 htmlElements.btnLoadMore.addEventListener('click', loadMoreFn);
 
-function searchFn(evt) {
+async function searchFn(evt) {
   evt.preventDefault();
   returnStartValue();
-
   searchValue = evt.target.searchQuery.value;
-  createSearch(searchValue)
-    .then(res => {
-      if (res) {
-        htmlElements.div.insertAdjacentHTML('beforeend', createCards(res.hits));
-        stopCounter += 40;
-        goodSearch(res.totalHits);
-        if (res.totalHits >= stopCounter) {
-          htmlElements.btnLoadMore.style.display = 'block';
-          return;
-        }
-        htmlElements.sorry.style.display = 'inline-block';
-      }
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
-function loadMoreFn() {
-  stopCounter += 40;
 
-  createSearch(searchValue)
-    .then(res => {
-      if (!res) {
-        throw error;
+  try {
+    const respons = await createSearch(searchValue);
+    if (respons) {
+      htmlElements.div.insertAdjacentHTML(
+        'beforeend',
+        createCards(respons.hits)
+      );
+      stopCounter += 40;
+      goodSearch(respons.totalHits);
+      if (respons.totalHits >= stopCounter) {
+        htmlElements.btnLoadMore.style.display = 'block';
+        return;
       }
-      if (res.totalHits <= stopCounter) {
-        htmlElements.sorry.style.display = 'inline-block';
-        htmlElements.btnLoadMore.style.display = 'none';
-      }
-      htmlElements.div.insertAdjacentHTML('beforeend', createCards(res.hits));
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function loadMoreFn() {
+  stopCounter += 40;
+  try {
+    const respons = await createSearch(searchValue);
+    if (!respons) {
+      throw error;
+    }
+    if (respons.totalHits <= stopCounter) {
+      htmlElements.sorry.style.display = 'inline-block';
+      htmlElements.btnLoadMore.style.display = 'none';
+    }
+    htmlElements.div.insertAdjacentHTML('beforeend', createCards(respons.hits));
+  } catch (err) {
+    console.log(err);
+  }
 }

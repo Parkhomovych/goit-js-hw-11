@@ -29,8 +29,8 @@ html {
 }
 body {
   margin: 0;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .box {
   max-width: 980px;
@@ -88,15 +88,15 @@ body {
   fill: #2dfd51;
 }
 .gallery {
-  max-width: 350px;
+  max-width: 1170px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 30px;
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 30px;
 }
-@media only screen and (min-width: 680px) and (max-width: 999.9px) {
+/* @media only screen and (min-width: 680px) and (max-width: 999.9px) {
   .gallery {
     max-width: 700px;
   }
@@ -105,17 +105,16 @@ body {
   .gallery {
     max-width: 980px;
   }
-}
+} */
 .photo-card {
-  width: 300px;
   outline: 1px solid #2dfd51;
   border-radius: 0 0 10px 10px;
 }
 .info {
-  width: 300px;
+  width: 270px;
   height: 62px;
   display: flex;
-  padding: 10px;
+  padding: 7px;
   gap: 10px;
   border-radius: 0 0 10px 10px;
   background: rgb(34, 193, 195);
@@ -149,7 +148,7 @@ body {
   align-items: center;
   position: fixed;
   bottom: 30px;
-  right: 25px;
+  right: 20px;
   background-color: rgb(42, 245, 152);
   border-radius: 50%;
 }
@@ -164,8 +163,8 @@ body {
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 30px;
-  left: 25px;
+  bottom: 30px;
+  left: 20px;
   background-color: rgba(0, 158, 253, 1);
   border-radius: 50%;
 }

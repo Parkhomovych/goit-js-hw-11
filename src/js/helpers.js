@@ -29,7 +29,7 @@ function createCards(arr) {
           downloads,
         }) => {
           return `<div class="photo-card">
-      <img class='img-card' src="${webformatURL}" alt="${tags}" loading="lazy" width='300px' height='200px'/>
+      <img class='img-card' src="${webformatURL}" alt="${tags}" loading="lazy" width='270px' height='200px'/>
       <div class="info">
         <p class="info-item">
           <b>Likes</b>${likes}
