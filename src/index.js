@@ -13,7 +13,7 @@ function returnStartValue() {
   numbPage = 0;
   stopCounter = 0;
 }
-async function createSearch(search) {
+async function createSearch() {
   const BASE_URL = 'https://pixabay.com/api/?';
   const searchParams = new URLSearchParams({
     key: '38997661-54e537908498a57afa3a31c75',
@@ -44,7 +44,7 @@ async function searchFn(evt) {
   searchValue = evt.target.searchQuery.value;
 
   try {
-    const respons = await createSearch(searchValue);
+    const respons = await createSearch();
     if (respons) {
       htmlElements.div.insertAdjacentHTML(
         'beforeend',
@@ -54,7 +54,8 @@ async function searchFn(evt) {
       goodSearch(respons.totalHits);
       if (respons.totalHits >= stopCounter) {
         htmlElements.btnLoadMore.style.display = 'block';
-        return;
+      } else {
+        htmlElements.sorry.style.display = 'inline-block';
       }
     }
   } catch (err) {
